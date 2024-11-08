@@ -1,0 +1,83 @@
+#chart {
+    margin: 20px auto;
+    width: 750px;  
+    height: 500px;  /* Increased height */
+    position: relative;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;  
+  }
+  
+  p {
+    text-align: center;
+    font-size: 1rem;
+    margin: 20px 0;  
+  }
+  
+  .legend {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: -250px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .legend-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; 
+  }
+  
+  .legend-row rect {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;  
+  }
+  
+  .legend-row text {
+    font-size: 0.4rem;
+    color: #333;
+  }
+  
+  .arc text {
+    font-size: 0.9rem;  
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;  
+  }
+  
+  .arc polyline {
+    stroke: black;
+    stroke-width: 1px;
+    opacity: 0.7;
+  }
+  
+  .arc path {
+    cursor: pointer;
+  }
+  
+  .arc text, .arc polyline {
+    transition: opacity 0.3s ease;
+  }
+  
+  .arc:hover text,
+  .arc:hover polyline {
+    opacity: 1;
+  }
+  
+  .tooltip {
+    opacity: 0;
+    position: absolute;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 1000; /* Ensure tooltip appears above pie chart */
+  }

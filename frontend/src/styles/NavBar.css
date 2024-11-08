@@ -1,0 +1,49 @@
+/* Navbar styling */
+.navbar {
+  min-height: 50px; /* Set minimum height */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3c4a8a;
+  padding: 10px 20px;
+}
+
+/* Navigation links */
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover,
+.nav-link:focus {
+  text-decoration: underline;
+}
+
+/* Logout button styling */
+.logout-button {
+  background-color: #e63946;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+/* Logout button hover and focus state */
+.logout-button:hover,
+.logout-button:focus {
+  background-color: #d62828;
+  outline: 3px solid #ffffff; /* Distinct outline for accessibility */
+  outline-offset: 2px;
+}
+
+/* Add focus styles for improved accessibility */
+.nav-link:focus, .logout-button:focus {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
