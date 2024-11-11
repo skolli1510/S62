@@ -3,8 +3,7 @@ const SolarGeneration = require('./models/SolarGeneration');
 const MonthlySolarData = require('./models/MonthlySolarData');
 
 mongoose.connect('mongodb://localhost:27017/S62', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
 });
 
 const solarGenerationData = [
