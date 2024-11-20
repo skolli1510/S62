@@ -11,7 +11,7 @@ const Reports = () => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:5000/api/solar-generation', {
+        const response = await axios.get('https://s62.onrender.com/api/solar-generation', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
