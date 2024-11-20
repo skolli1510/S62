@@ -59,3 +59,10 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}

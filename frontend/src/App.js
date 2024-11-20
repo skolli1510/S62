@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -7,17 +6,32 @@ import Summary from './components/Summary';
 import Reports from './components/Reports';
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
+import { jwtDecode } from 'jwt-decode';
 import './styles/NavBar.css';
 import Footer from './components/Footer';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token')); // Manage authentication token
 
+  const isTokenValid = (token) => {
+    if (!token) return false;
+
+    try {
+      const { exp } = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // Convert to seconds
+      return exp > currentTime;
+    } catch (error) {
+      console.error("Invalid token:", error);
+      return false;
+    }
+  };
+
   useEffect(() => {
     // Save token to localStorage to persist login across page refreshes
-    if (token) {
+    if (token && isTokenValid(token)) {
       localStorage.setItem('token', token);
     } else {
+      setToken(null); // Clear token if invalid
       localStorage.removeItem('token');
     }
   }, [token]);
@@ -36,23 +50,23 @@ function App() {
         <Route path="/login" element={<Login setToken={setToken} />} />
         
         {/* Protected Routes */}
-
         <Route
           path="/dashboard"
-          element={<PrivateRoute isAuthenticated={token}><Dashboard /></PrivateRoute>}
+          element={<PrivateRoute><Dashboard /></PrivateRoute>}
         />
         <Route
           path="/summary"
-          element={<PrivateRoute isAuthenticated={token}><Summary /></PrivateRoute>}
+          element={<PrivateRoute><Summary /></PrivateRoute>}
         />
         <Route
           path="/reports"
-          element={<PrivateRoute isAuthenticated={token}><Reports /></PrivateRoute>}
+          element={<PrivateRoute><Reports /></PrivateRoute>}
         />
       </Routes>
-      <Footer /> {/* Add the Footer here */}
+      <Footer />
     </Router>
   );
 }
 
 export default App;
+

@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
     const { username, password } = req.body;
 
     if (username === VALID_USERNAME && password === VALID_PASSWORD) {
-        const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '3m' });
         console.log('Generated token:', token); // Log the token
         return res.json({ token });
     } else {

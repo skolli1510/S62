@@ -1,26 +1,24 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Extract token after "Bearer "
-    
-    console.log("Received token:", token); // Log the received token
+const authenticateToken = (req, res, next) => {
+    const token = req.headers['authorization']?.split(' ')[1];
 
     if (!token) {
-        console.log('No token provided');
-        return res.sendStatus(403);
+        return res.status(401).json({ message: 'No token provided. Please log in.' });
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
-            console.log('Token verification failed:', err.message);
-            return res.sendStatus(403);
+            // Distinguish between token expiration and other errors
+            if (err.name === 'TokenExpiredError') {
+                return res.status(401).json({ message: 'Token expired. Please log in again.' });
+            }
+            return res.status(403).json({ message: 'Invalid token.' });
         }
-        req.user = user; // Attach user information to the request
+
+        req.user = user;
         next();
     });
-}
-
+};
 
 module.exports = authenticateToken;

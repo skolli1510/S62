@@ -3,6 +3,7 @@ require('dotenv').config();
 const SolarGeneration = require('./models/SolarGeneration');
 const MonthlySolarData = require('./models/MonthlySolarData');
 
+
 mongoose.connect(process.env.MONGODB_URI, {
     serverSelectionTimeoutMS: 5000,
 });

@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import '../styles/Reports.css';
 
 const Reports = () => {
+   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -27,8 +28,8 @@ const Reports = () => {
   const drawChart = (data) => {
     d3.select('#chart').selectAll('*').remove();
 
-    const width = 800;
-    const height = 500;
+    const width = 700;
+    const height = 400;
     const radius = Math.min(width, height) / 2;
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
